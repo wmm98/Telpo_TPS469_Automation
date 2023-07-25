@@ -1,0 +1,20 @@
+注意：
+
+踩过的坑：
+1、reboot之后 要root的话先用 sub_root, 不用device.root(),会发生运行时错误
+  已解决：1、root和remount之间需要等待1秒钟--高通安卓8.1
+        2、采用os进程发送命令（root, remount）方式更稳定,
+        3、前面 1,2 等待安卓机器完全稳定后执行更加稳定
+
+2、高通用普通的安装方式 pm install -r, 其他的用 device.install() 来适配系统
+ --统一解决 ： device.install(reinstall=True)  覆盖安装
+
+
+3、reboot之后 device.push, remount, root, pull 等等python-adb方法注意时间之间的等待
+ --解决方式参来1、
+
+ 4、高通安卓8.1启动应用要等待1s钟再检查进程有没有起来， 可能是不同芯片或者安卓版本旧导致系统响应时间慢
+
+
+
+ python调用jar包要安装VC++
